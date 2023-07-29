@@ -2,7 +2,7 @@
 Title: Text Classification using FNet
 Author: [Abheesht Sharma](https://github.com/abheesht17/)
 Date created: 2022/06/01
-Last modified: 2022/12/21
+Last modified: 2023/07/29
 Description: Text Classification on the IMDb Dataset using `keras_nlp.layers.FNetEncoder` layer.
 Accelerator: GPU
 """
@@ -47,14 +47,29 @@ Fourier Transform (FFT); this reduces the time complexity from `O(n^2)`
 """
 ## Setup
 
-Before we start with the implementation, let's import all the necessary packages.
+Before we start with the implementation, let's install all necessary libraries
+and import all the necessary packages.
 """
 
-import keras_nlp
-import tensorflow as tf
+"""shell
+pip install git+https://github.com/keras-team/keras-nlp.git --upgrade -q
+"""
+
+"""
+This examples uses [Keras Core](https://keras.io/keras_core/) to work in any of
+`"tensorflow"`, `"jax"` or `"torch"`. Support for Keras Core is baked into
+KerasNLP, simply change the `"KERAS_BACKEND"` environment variable to select
+the backend of your choice. We select the JAX backend below.
+"""
+
 import os
 
-from tensorflow import keras
+os.environ["KERAS_BACKEND"] = "jax"  # or "tensorflow" or "torch"
+
+import keras_core as keras
+import keras_nlp
+import tensorflow as tf
+
 
 keras.utils.set_random_seed(42)
 
@@ -72,7 +87,7 @@ INTERMEDIATE_DIM = 512
 """
 ## Loading the dataset
 
-First, let's download the IMDB dataset and extract it.
+First, let's download the IMDb dataset and extract it.
 """
 
 """shell
